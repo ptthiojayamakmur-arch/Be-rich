@@ -1,0 +1,331 @@
+{
+  "detect": null,
+  "scan": [
+    {
+      "path": "./.env.example",
+      "items": [
+        {
+          "name": "DB_PASSWORD",
+          "raw_value": "super_secret_database_password",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "fhcre_frperg_qngnonfr_cnffjbeq"
+            }
+          ],
+          "tags": [
+            "password"
+          ],
+          "masked": "supe...word"
+        },
+        {
+          "name": "API_KEY",
+          "raw_value": "api_key_12345abcde",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "ncv_xrl_12345nopqr"
+            }
+          ],
+          "tags": [
+            "alnum_token_like"
+          ],
+          "masked": "api_...bcde"
+        },
+        {
+          "name": "SECRET_API_KEY",
+          "raw_value": "sk_s...alue",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "fx_f...nyhr"
+            }
+          ],
+          "tags": [
+            "stripe_secret_like"
+          ],
+          "masked": "sk_s...alue"
+        },
+        {
+          "name": "STRIPE_KEY",
+          "raw_value": "sk_live_stripe_secret_key",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "fx_yvir_fgevcr_frperg_xrl"
+            }
+          ],
+          "tags": [
+            "stripe_secret_like"
+          ],
+          "masked": "sk_l..._key"
+        },
+        {
+          "name": "PAYPAL_SECRET",
+          "raw_value": "paypal_client_secret_here",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "cnlcny_pyvrag_frperg_urer"
+            }
+          ],
+          "tags": [],
+          "masked": "payp...here"
+        },
+        {
+          "name": "JWT_SECRET",
+          "raw_value": "jwt_secret_key_for_token_signing",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "wjg_frperg_xrl_sbe_gbxra_fvtavat"
+            }
+          ],
+          "tags": [
+            "jwt_like"
+          ],
+          "masked": "jwt_...ning"
+        },
+        {
+          "name": "AUTH_TOKEN",
+          "raw_value": "bear...alue",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "orne...nyhr"
+            }
+          ],
+          "tags": [],
+          "masked": "bear...alue"
+        },
+        {
+          "name": "REFRESH_TOKEN_SECRET",
+          "raw_value": "refr...alue",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "erse...nyhr"
+            }
+          ],
+          "tags": [],
+          "masked": "refr...alue"
+        },
+        {
+          "name": "ENCRYPTION_KEY",
+          "raw_value": "aes_256_encryption_master_key",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "nrf_256_rapelcgvba_znfgre_xrl"
+            }
+          ],
+          "tags": [
+            "alnum_token_like"
+          ],
+          "masked": "aes_..._key"
+        },
+        {
+          "name": "PASSWORD_SALT",
+          "raw_value": "bcry...hing",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "opel...uvat"
+            }
+          ],
+          "tags": [],
+          "masked": "bcry...hing"
+        },
+        {
+          "name": "SENDGRID_API_KEY",
+          "raw_value": "send...cret",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "fraq...perg"
+            }
+          ],
+          "tags": [],
+          "masked": "send...cret"
+        },
+        {
+          "name": "TWILIO_AUTH_TOKEN",
+          "raw_value": "twil...cret",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "gjvy...perg"
+            }
+          ],
+          "tags": [],
+          "masked": "twil...cret"
+        }
+      ]
+    },
+    {
+      "path": "./secrets_extracted.json",
+      "items": [
+        {
+          "name": "files.example_config.json.database.password",
+          "raw_value": "supe..._123",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "fhcr..._123"
+            }
+          ],
+          "tags": [
+            "password"
+          ],
+          "masked": "supe..._123"
+        },
+        {
+          "name": "files.example_config.json.api.api_key",
+          "raw_value": "sk_l...cdef",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "fx_y...pqrs"
+            }
+          ],
+          "tags": [
+            "stripe_secret_like"
+          ],
+          "masked": "sk_l...cdef"
+        },
+        {
+          "name": "files.example_config.json.api.secret_key",
+          "raw_value": "whse...alue",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "jufr...nyhr"
+            }
+          ],
+          "tags": [],
+          "masked": "whse...alue"
+        },
+        {
+          "name": "files.example_config.json.jwt.secret",
+          "raw_value": "jwt_...tant",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "wjg_...gnag"
+            }
+          ],
+          "tags": [
+            "jwt_like"
+          ],
+          "masked": "jwt_...tant"
+        },
+        {
+          "name": "files.example_config.yaml.database.password",
+          "raw_value": "db_p..._123",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "qo_c..._123"
+            }
+          ],
+          "tags": [
+            "password"
+          ],
+          "masked": "db_p..._123"
+        },
+        {
+          "name": "files.example_config.yaml.services.stripe.api_key",
+          "raw_value": "sk_l...2345",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "fx_y...2345"
+            }
+          ],
+          "tags": [
+            "stripe_secret_like"
+          ],
+          "masked": "sk_l...2345"
+        },
+        {
+          "name": "files.example_config.yaml.services.stripe.secret_key",
+          "raw_value": "rk_l...7890",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "ex_y...7890"
+            }
+          ],
+          "tags": [],
+          "masked": "rk_l...7890"
+        },
+        {
+          "name": "files.example_config.yaml.services.auth.oauth_secret",
+          "raw_value": "oaut...alue",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "bnhg...nyhr"
+            }
+          ],
+          "tags": [],
+          "masked": "oaut...alue"
+        },
+        {
+          "name": "files.example_config.yaml.services.auth.jwt_secret",
+          "raw_value": "jwt_...cret",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "wjg_...perg"
+            }
+          ],
+          "tags": [
+            "jwt_like"
+          ],
+          "masked": "jwt_...cret"
+        },
+        {
+          "name": "files.example_config.yaml.services.auth.refresh_token_secret",
+          "raw_value": "refr..._key",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "erse..._xrl"
+            }
+          ],
+          "tags": [],
+          "masked": "refr..._key"
+        },
+        {
+          "name": "files.example_config.yaml.security.encryption_key",
+          "raw_value": "aes2...here",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "nrf2...urer"
+            }
+          ],
+          "tags": [],
+          "masked": "aes2...here"
+        },
+        {
+          "name": "files.example_config.yaml.security.password_salt",
+          "raw_value": "bcry...alue",
+          "decodings": [
+            {
+              "method": "rot13",
+              "result": "opel...nyhr"
+            }
+          ],
+          "tags": [],
+          "masked": "bcry...alue"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "domain": null,
+    "scan_root": "/workspaces/Be-rich"
+  }
+}

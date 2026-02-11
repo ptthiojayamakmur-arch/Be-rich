@@ -1,0 +1,193 @@
+{
+  "scanned_root": "/workspaces/Be-rich",
+  "results": [
+    {
+      "path": "./.env.example",
+      "items": [
+        {
+          "name": "DB_PASSWORD",
+          "raw_value": "supe...word",
+          "decodings": [],
+          "tags": [
+            "password"
+          ]
+        },
+        {
+          "name": "API_KEY",
+          "raw_value": "api_...bcde",
+          "decodings": [],
+          "tags": [
+            "alnum_token_like"
+          ]
+        },
+        {
+          "name": "SECRET_API_KEY",
+          "raw_value": "sk_s...alue",
+          "decodings": [],
+          "tags": [
+            "stripe_secret_like"
+          ]
+        },
+        {
+          "name": "STRIPE_KEY",
+          "raw_value": "sk_l..._key",
+          "decodings": [],
+          "tags": [
+            "stripe_secret_like"
+          ]
+        },
+        {
+          "name": "PAYPAL_SECRET",
+          "raw_value": "payp...here",
+          "decodings": [],
+          "tags": []
+        },
+        {
+          "name": "JWT_SECRET",
+          "raw_value": "jwt_...ning",
+          "decodings": [],
+          "tags": [
+            "jwt_like"
+          ]
+        },
+        {
+          "name": "AUTH_TOKEN",
+          "raw_value": "bear...alue",
+          "decodings": [],
+          "tags": []
+        },
+        {
+          "name": "REFRESH_TOKEN_SECRET",
+          "raw_value": "refr...alue",
+          "decodings": [],
+          "tags": []
+        },
+        {
+          "name": "ENCRYPTION_KEY",
+          "raw_value": "aes_..._key",
+          "decodings": [],
+          "tags": [
+            "alnum_token_like"
+          ]
+        },
+        {
+          "name": "PASSWORD_SALT",
+          "raw_value": "bcry...hing",
+          "decodings": [],
+          "tags": []
+        },
+        {
+          "name": "SENDGRID_API_KEY",
+          "raw_value": "send...cret",
+          "decodings": [],
+          "tags": []
+        },
+        {
+          "name": "TWILIO_AUTH_TOKEN",
+          "raw_value": "twil...cret",
+          "decodings": [],
+          "tags": []
+        }
+      ]
+    },
+    {
+      "path": "./secrets_extracted.json",
+      "items": [
+        {
+          "name": "files.example_config.json.database.password",
+          "raw_value": "supe..._123",
+          "decodings": [],
+          "tags": [
+            "alnum_token_like",
+            "password"
+          ]
+        },
+        {
+          "name": "files.example_config.json.api.api_key",
+          "raw_value": "sk_l...cdef",
+          "decodings": [],
+          "tags": [
+            "stripe_secret_like",
+            "alnum_token_like"
+          ]
+        },
+        {
+          "name": "files.example_config.json.api.secret_key",
+          "raw_value": "whse...alue",
+          "decodings": [],
+          "tags": [
+            "webhook_secret_like"
+          ]
+        },
+        {
+          "name": "files.example_config.json.jwt.secret",
+          "raw_value": "jwt_...tant",
+          "decodings": [],
+          "tags": [
+            "jwt_like"
+          ]
+        },
+        {
+          "name": "files.example_config.yaml.database.password",
+          "raw_value": "db_p..._123",
+          "decodings": [],
+          "tags": [
+            "alnum_token_like",
+            "password"
+          ]
+        },
+        {
+          "name": "files.example_config.yaml.services.stripe.api_key",
+          "raw_value": "sk_l...2345",
+          "decodings": [],
+          "tags": [
+            "stripe_secret_like",
+            "alnum_token_like"
+          ]
+        },
+        {
+          "name": "files.example_config.yaml.services.stripe.secret_key",
+          "raw_value": "rk_l...7890",
+          "decodings": [],
+          "tags": [
+            "alnum_token_like"
+          ]
+        },
+        {
+          "name": "files.example_config.yaml.services.auth.oauth_secret",
+          "raw_value": "oaut...alue",
+          "decodings": [],
+          "tags": []
+        },
+        {
+          "name": "files.example_config.yaml.services.auth.jwt_secret",
+          "raw_value": "jwt_...cret",
+          "decodings": [],
+          "tags": [
+            "jwt_like"
+          ]
+        },
+        {
+          "name": "files.example_config.yaml.services.auth.refresh_token_secret",
+          "raw_value": "refr..._key",
+          "decodings": [],
+          "tags": []
+        },
+        {
+          "name": "files.example_config.yaml.security.encryption_key",
+          "raw_value": "aes2...here",
+          "decodings": [],
+          "tags": [
+            "alnum_token_like"
+          ]
+        },
+        {
+          "name": "files.example_config.yaml.security.password_salt",
+          "raw_value": "bcry...alue",
+          "decodings": [],
+          "tags": []
+        }
+      ]
+    }
+  ]
+}
