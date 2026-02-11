@@ -1,0 +1,77 @@
+#!/usr/bin/env python3
+"""Agent entrypoint: orchestrate technology detection and config-key extraction.
+
+Usage examples:
+  python3 scripts/agent_entry.py --domain example.com --scan-root . --out output/agent_report.json --mask --validate --decodings
+  python3 scripts/agent_entry.py --scan-root . --out output/agent_report.json --run-scan --mask
+"""
+import argparse
+import json
+import os
+from typing import Any, Dict
+
+from scripts.detect_technologies import detect_technologies
+from scripts.extract_keys import find_files, scan_file
+
+
+def main():
+    ap = argparse.ArgumentParser(description="Agent entrypoint: detect technologies and extract keys")
+    ap.add_argument("--domain", help="Domain to detect technologies for")
+    ap.add_argument("--timeout", type=int, default=10, help="Timeout for network probes")
+    ap.add_argument("--scan-root", default='.', help="Root path to scan for config files")
+    ap.add_argument("--out", default='output/agent_report.json', help="Output JSON file")
+    ap.add_argument("--mask", action='store_true', help="Mask sensitive values in scan output")
+    ap.add_argument("--validate", action='store_true', help="Include heuristic validation tags")
+    ap.add_argument("--decodings", action='store_true', help="Attempt additional decodings in scan")
+    ap.add_argument("--run-detect", action='store_true', help="Run technology detection (requires --domain)")
+    ap.add_argument("--run-scan", action='store_true', help="Run config scan")
+    ap.add_argument("--verbose", action='store_true')
+    args = ap.parse_args()
+
+    report: Dict[str, Any] = {
+        'detect': None,
+        'scan': [],
+        'meta': {
+            'domain': args.domain,
+            'scan_root': os.path.abspath(args.scan_root),
+        }
+    }
+
+    # Run detection
+    if args.run_detect:
+        if not args.domain:
+            raise SystemExit("--run-detect requires --domain")
+        det = detect_technologies(args.domain, timeout=args.timeout, verbose=args.verbose)
+        report['detect'] = det
+
+    # Run scan
+    if args.run_scan:
+        files = find_files(args.scan_root)
+        scans = []
+        for p in files:
+            res = scan_file(p, do_decodings=args.decodings, do_validate=args.validate, do_mask=args.mask)
+            if isinstance(res, dict) and res.get('items'):
+                scans.append(res)
+        report['scan'] = scans
+
+    # If neither flag set, run both (safe default: run scan only if scan-root exists)
+    if not args.run_detect and not args.run_scan:
+        if args.domain:
+            report['detect'] = detect_technologies(args.domain, timeout=args.timeout, verbose=args.verbose)
+        files = find_files(args.scan_root)
+        scans = []
+        for p in files:
+            res = scan_file(p, do_decodings=args.decodings, do_validate=args.validate, do_mask=args.mask)
+            if isinstance(res, dict) and res.get('items'):
+                scans.append(res)
+        report['scan'] = scans
+
+    os.makedirs(os.path.dirname(args.out), exist_ok=True)
+    with open(args.out, 'w', encoding='utf-8') as f:
+        json.dump(report, f, indent=2)
+
+    print('Agent run complete. Report written to', args.out)
+
+
+if __name__ == '__main__':
+    main()
