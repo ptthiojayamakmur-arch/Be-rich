@@ -12,6 +12,30 @@ from typing import Any, Dict
 
 from scripts.detect_technologies import detect_technologies
 from scripts.extract_keys import find_files, scan_file
+import re
+
+
+def discover_domains(root: str):
+    """Scan files under root for domain-like strings and return a list of unique domains."""
+    domain_re = re.compile(r"\b([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}\b", re.I)
+    found = set()
+    for dirpath, dirs, files in os.walk(root):
+        # skip git
+        if '.git' in dirpath.split(os.sep):
+            continue
+        for fname in files:
+            path = os.path.join(dirpath, fname)
+            try:
+                with open(path, 'r', encoding='utf-8', errors='ignore') as f:
+                    data = f.read()
+            except Exception:
+                continue
+            for m in domain_re.findall(data):
+                d = m.lower()
+                if d.startswith('127.') or d.startswith('localhost'):
+                    continue
+                found.add(d)
+    return sorted(found)
 
 
 def main():
@@ -24,6 +48,7 @@ def main():
     ap.add_argument("--validate", action='store_true', help="Include heuristic validation tags")
     ap.add_argument("--decodings", action='store_true', help="Attempt additional decodings in scan")
     ap.add_argument("--run-detect", action='store_true', help="Run technology detection (requires --domain)")
+    ap.add_argument("--discover-domains", action='store_true', help="Discover domains in files under --scan-root and run detection on them")
     ap.add_argument("--run-scan", action='store_true', help="Run config scan")
     ap.add_argument("--verbose", action='store_true')
     args = ap.parse_args()
@@ -43,6 +68,15 @@ def main():
             raise SystemExit("--run-detect requires --domain")
         det = detect_technologies(args.domain, timeout=args.timeout, verbose=args.verbose)
         report['detect'] = det
+
+    # Discover domains in repo and run detection
+    if args.discover_domains:
+        domains = discover_domains(args.scan_root)
+        report['meta']['discovered_domains'] = domains
+        dets = {}
+        for d in domains:
+            dets[d] = detect_technologies(d, timeout=args.timeout, verbose=args.verbose)
+        report['detect_discovered'] = dets
 
     # Run scan
     if args.run_scan:

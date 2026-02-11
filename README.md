@@ -20,6 +20,15 @@ Example with all features:
 ```bash
 python3 scripts/extract_keys.py --root . --mask --validate --decodings
 ```
+
+Agent entrypoint:
+
+```bash
+python3 scripts/agent_entry.py --scan-root . --out output/agent_report.json --mask --validate --decodings --discover-domains
+```
+
+Options:
+- `--discover-domains`: scan repository files for domain-like strings and run `detect_technologies` on them (results in `detect_discovered` in report).
 ```
 
 Results are written to `output/keys_extracted.json`.
