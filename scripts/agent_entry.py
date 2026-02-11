@@ -12,6 +12,7 @@ from typing import Any, Dict
 
 from scripts.detect_technologies import detect_technologies
 from scripts.extract_keys import find_files, scan_file
+from scripts.dns_inspector import inspect_domain_dns, export_report as export_dns_report
 import re
 
 
@@ -49,6 +50,7 @@ def main():
     ap.add_argument("--decodings", action='store_true', help="Attempt additional decodings in scan")
     ap.add_argument("--run-detect", action='store_true', help="Run technology detection (requires --domain)")
     ap.add_argument("--discover-domains", action='store_true', help="Discover domains in files under --scan-root and run detection on them")
+    ap.add_argument("--run-dns", action='store_true', help="Run DNS inspection for --domain or discovered domains")
     ap.add_argument("--run-scan", action='store_true', help="Run config scan")
     ap.add_argument("--verbose", action='store_true')
     args = ap.parse_args()
@@ -69,6 +71,15 @@ def main():
         det = detect_technologies(args.domain, timeout=args.timeout, verbose=args.verbose)
         report['detect'] = det
 
+    # Run DNS inspection for the primary domain
+    if args.run_dns:
+        if args.domain:
+            dnsr = inspect_domain_dns(args.domain, timeout=args.timeout)
+            report['dns'] = {args.domain: dnsr}
+        else:
+            report['dns'] = {}
+
+
     # Discover domains in repo and run detection
     if args.discover_domains:
         domains = discover_domains(args.scan_root)
@@ -77,6 +88,11 @@ def main():
         for d in domains:
             dets[d] = detect_technologies(d, timeout=args.timeout, verbose=args.verbose)
         report['detect_discovered'] = dets
+        if args.run_dns:
+            dns_results = {}
+            for d in domains:
+                dns_results[d] = inspect_domain_dns(d, timeout=args.timeout)
+            report['dns_discovered'] = dns_results
 
     # Run scan
     if args.run_scan:

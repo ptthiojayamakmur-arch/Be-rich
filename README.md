@@ -11,9 +11,6 @@ python3 scripts/extract_keys.py --root .
 
 Options:
 
-- `--mask`: include `masked` fields in output (redacted values)
-- `--validate`: include heuristic tags such as `stripe_secret_like`, `jwt_like`
-- `--decodings`: attempt extra decodings (rot13, base64+gzip)
 
 Example with all features:
 
@@ -28,7 +25,8 @@ python3 scripts/agent_entry.py --scan-root . --out output/agent_report.json --ma
 ```
 
 Options:
-- `--discover-domains`: scan repository files for domain-like strings and run `detect_technologies` on them (results in `detect_discovered` in report).
+- `--run-dns`: run DNS inspection (records, SPF/DMARC/DKIM, WHOIS, DNSSEC hints, AXFR attempts, certificate transparency via crt.sh)
+DNS inspection exports are included in the aggregated report under `dns` (for primary `--domain`) and `dns_discovered` for discovered domains. Use `--run-dns --discover-domains` to run DNS checks for discovered domains.
 ```
 
 Results are written to `output/keys_extracted.json`.
